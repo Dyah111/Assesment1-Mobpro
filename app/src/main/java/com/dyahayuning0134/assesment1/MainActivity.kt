@@ -67,13 +67,13 @@ fun MainScreen() {
         }
     ) { innerPadding ->
         Column (modifier = Modifier.padding(innerPadding)) {
-            Stock(data)
+            ScreenStockList(data)
         }
     }
 }
 
 @Composable
-fun Stock(stockList: List<Stock>) {
+fun ScreenStockList(stockList: List<Stock>) {
     LazyColumn(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp),
         contentPadding = PaddingValues(16.dp)) {
