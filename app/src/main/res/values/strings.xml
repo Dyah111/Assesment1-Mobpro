@@ -2,4 +2,6 @@
     <string name="app_name">Stock Items</string>
     <string name="gambar">Gambar %1$s</string>
     <string name="lanjut">Lanjut</string>
+    <string name="count">count +1</string>
+    <string name="harga">Harga</string>
 </resources>
