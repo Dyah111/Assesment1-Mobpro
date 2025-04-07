@@ -6,12 +6,41 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -19,6 +48,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.dyahayuning0134.assesment1.navigation.Screen
+import com.dyahayuning0134.assesment1.navigation.SetupNavGraph
 import com.dyahayuning0134.assesment1.ui.theme.Assesment1Theme
 
 class MainActivity : ComponentActivity() {
@@ -27,7 +60,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Assesment1Theme {
-                MainScreen()
+                SetupNavGraph()
             }
         }
     }
@@ -35,12 +68,12 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
+fun MainScreen(navController: NavHostController) {
     val data = listOf(
         Stock("Soaps", R.drawable.sabun),
         Stock("Alum", R.drawable.tawas),
         Stock("Eggs", R.drawable.telur),
-        Stock("Rice", R.drawable.beras)
+        Stock("Resource", R.drawable.beras)
     )
 
     Scaffold(
@@ -52,7 +85,18 @@ fun MainScreen() {
                 colors = TopAppBarDefaults.mediumTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary,
-                )
+                ),
+                actions = {
+                    IconButton(onClick = {
+                        navController.navigate(Screen.About.route)
+                    }) {
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = stringResource(R.string.tentang_aplikasi),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                }
             )
         }
     ) { innerPadding ->
@@ -88,12 +132,16 @@ fun ScreenStockList(stockList: List<Stock>) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScreenContent(stock: Stock, modifier: Modifier = Modifier) {
-    var harga by remember { mutableIntStateOf(0) }
-    var jumlah by remember { mutableIntStateOf(0) }
-    var input by remember { mutableStateOf("") }
-    var expanded by remember { mutableStateOf(false) }
-    var selectedQuantity by remember { mutableStateOf("Sedang") }
-    val quantityOptions = listOf("Banyak", "Sedang", "Sedikit")
+    var harga by rememberSaveable { mutableIntStateOf(0) }
+    var jumlah by rememberSaveable { mutableIntStateOf(0) }
+    var input by rememberSaveable { mutableStateOf("") }
+    var expanded by rememberSaveable { mutableStateOf(false) }
+    var selectedQuantity by rememberSaveable { mutableStateOf("Sedang") }
+    val quantityOptions = listOf(
+        stringResource(id = R.string.banyak),
+        stringResource(id = R.string.sedang),
+        stringResource(id = R.string.sedikit)
+    )
 
     Column(
         modifier = modifier.padding(8.dp),
@@ -115,7 +163,7 @@ fun ScreenContent(stock: Stock, modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        if (stock.name == "Rice") {
+        if (stock.name == "Resource") {
             ExposedDropdownMenuBox(
                 expanded = expanded,
                 onExpandedChange = { expanded = !expanded }
@@ -194,6 +242,6 @@ fun ScreenContent(stock: Stock, modifier: Modifier = Modifier) {
 @Composable
 fun MainScreensPreview() {
     Assesment1Theme {
-        MainScreen()
+        MainScreen(rememberNavController())
     }
 }

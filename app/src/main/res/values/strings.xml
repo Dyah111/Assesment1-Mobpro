@@ -4,4 +4,12 @@
     <string name="lanjut">Lanjut</string>
     <string name="count">count +1</string>
     <string name="harga">Harga</string>
+    <string name="banyak">Many</string>
+    <string name="sedang">Medium</string>
+    <string name="sedikit">Little</string>
+    <string name="tentang_aplikasi">About Application</string>
+    <string name="copyright">This application is made to make it easier to stock
+        the items you need to spend every month or week.\n\nCopyright © 2025 Dyah
+        Ayuning.\nAll rights reserved</string>
+    <string name="kembali">Back</string>
 </resources>

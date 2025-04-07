@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation("androidx.compose.material3:material3:1.2.0-beta01")
+    implementation(libs.androidx.navigation.compose)
 
     testImplementation(libs.junit)
 
