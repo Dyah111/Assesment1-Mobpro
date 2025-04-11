@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Stock Items</string>
     <string name="gambar">Gambar %1$s</string>
-    <string name="lanjut">Lanjut</string>
+    <string name="Rangkum">Summarize</string>
     <string name="count">count +1</string>
     <string name="harga">Harga</string>
     <string name="banyak">Many</string>
@@ -11,5 +11,8 @@
     <string name="copyright">This application is made to make it easier to stock
         the items you need to spend every month or week.\n\nCopyright © 2025 Dyah
         Ayuning.\nAll rights reserved</string>
+    <string name="profile">Profile</string>
     <string name="kembali">Back</string>
+    <string name="nama">Name</string>
+    <string name="nim">NIM</string>
 </resources>

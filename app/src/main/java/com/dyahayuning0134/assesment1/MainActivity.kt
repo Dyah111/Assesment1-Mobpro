@@ -21,7 +21,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Info
+import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -73,7 +73,7 @@ fun MainScreen(navController: NavHostController) {
         Stock("Soaps", R.drawable.sabun),
         Stock("Alum", R.drawable.tawas),
         Stock("Eggs", R.drawable.telur),
-        Stock("Resource", R.drawable.beras)
+        Stock("Rice", R.drawable.beras)
     )
 
     Scaffold(
@@ -88,11 +88,11 @@ fun MainScreen(navController: NavHostController) {
                 ),
                 actions = {
                     IconButton(onClick = {
-                        navController.navigate(Screen.About.route)
+                        navController.navigate(Screen.Profile.route)
                     }) {
                         Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = stringResource(R.string.tentang_aplikasi),
+                            imageVector = Icons.Outlined.AccountCircle,
+                            contentDescription = stringResource(R.string.profile),
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }
@@ -132,11 +132,11 @@ fun ScreenStockList(stockList: List<Stock>) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScreenContent(stock: Stock, modifier: Modifier = Modifier) {
-    var harga by rememberSaveable { mutableIntStateOf(0) }
+    var price by rememberSaveable { mutableIntStateOf(0) }
     var jumlah by rememberSaveable { mutableIntStateOf(0) }
     var input by rememberSaveable { mutableStateOf("") }
     var expanded by rememberSaveable { mutableStateOf(false) }
-    var selectedQuantity by rememberSaveable { mutableStateOf("Sedang") }
+    var selectedQuantity by rememberSaveable { mutableStateOf("Medium") }
     val quantityOptions = listOf(
         stringResource(id = R.string.banyak),
         stringResource(id = R.string.sedang),
@@ -152,10 +152,10 @@ fun ScreenContent(stock: Stock, modifier: Modifier = Modifier) {
             onValueChange = { newValue ->
                 if (newValue.all { it.isDigit() }) {
                     input = newValue
-                    harga = newValue.toIntOrNull() ?: 0
+                    price = newValue.toIntOrNull() ?: 0
                 }
             },
-            label = { Text("Harga") },
+            label = { Text("Price") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
             singleLine = true,
             modifier = Modifier.fillMaxWidth()
@@ -163,7 +163,7 @@ fun ScreenContent(stock: Stock, modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        if (stock.name == "Resource") {
+        if (stock.name == "Rice") {
             ExposedDropdownMenuBox(
                 expanded = expanded,
                 onExpandedChange = { expanded = !expanded }
@@ -236,6 +236,7 @@ fun ScreenContent(stock: Stock, modifier: Modifier = Modifier) {
         )
     }
 }
+
 
 @Preview(showBackground = true)
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
