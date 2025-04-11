@@ -15,4 +15,9 @@
     <string name="kembali">Back</string>
     <string name="nama">Name</string>
     <string name="nim">NIM</string>
+    <string name="summary_template">Summary:\n%1$s: %2$d\n%3$s: %4$d\n%5$s: %6$d\n%7$s: %8$s</string>
+    <string name="price_label">Price</string>
+    <string name="quantity_label">Quantity</string>
+    <string name="summarize">Summarize</string>
+
 </resources>
